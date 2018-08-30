@@ -38,10 +38,12 @@ class DownloadYahooData:
             price['AdjClose'] = price['Adj Close']
             price['Open_'] = price['Open']
             price['Close_'] = price['Close']
-            price['PriceDate'] = price['Date']
-            price.to_csv(os.path.join(download_path, symbol + '.csv'))
+            price['PriceDate'] = price.index
+            price.reset_index(level=0, inplace=True)
+            to_df = price[['PriceDate', 'Open_', 'Low', 'High', 'Close_', 'AdjClose', 'Volume', 'UpdateDate',
+                           'SymbolId']]
+            to_df.to_csv(os.path.join(download_path, symbol + '.csv'))
             print("Data downloaded successfully for symbol: {} ".format(symbol))
-
         except Exception as e:
             print("Data not available for download for symbol: {0}, and error: {1} ".format(symbol, e))
 
@@ -50,5 +52,5 @@ if __name__ == '__main__':
     YahooData = DownloadYahooData()
     tickers = YahooData.get_tickers()
     # print(tickers)
-    YahooData.download_yf_data('AAPL', '2018-4-4')
+    YahooData.download_yf_data('FB', '2018-4-4')
     # print(YahooData.get_id(symbol='AAPL'))
