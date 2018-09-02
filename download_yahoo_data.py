@@ -52,5 +52,8 @@ if __name__ == '__main__':
     YahooData = DownloadYahooData()
     tickers = YahooData.get_tickers()
     # print(tickers)
-    YahooData.download_yf_data('FB', '2018-4-4')
+    symbols = ['FB', 'AAPL', 'SLB', 'HAL', 'XOM']
+
+    for sym in symbols:
+        YahooData.download_yf_data(sym, '2018-4-4')
     # print(YahooData.get_id(symbol='AAPL'))
