@@ -8,5 +8,5 @@ def check_internet():
         _ = requests.get(url, timeout=timeout)
         return True
     except requests.ConnectionError:
-        print("İnternet bağlantısı yok.")
+        print("No internet connection.")
     return False

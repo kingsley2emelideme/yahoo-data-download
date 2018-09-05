@@ -52,7 +52,7 @@ if __name__ == '__main__':
     YahooData = DownloadYahooData()
     tickers = YahooData.get_tickers()
     # print(tickers)
-    symbols = ['FB', 'AAPL', 'SLB', 'HAL', 'XOM']
+    symbols = ['SLTB', 'SBBC', 'HUNTU', 'CLDX', 'XOM', 'SLB']
 
     for sym in symbols:
         YahooData.download_yf_data(sym, '2018-4-4')
