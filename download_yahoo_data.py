@@ -2,10 +2,7 @@ import pandas as pd
 import pyodbc
 import os
 import fix_yahoo_finance as data
-from pandas.tseries.holiday import USFederalHolidayCalendar
-from pandas.tseries.offsets import CustomBusinessDay
 from datetime import date, datetime
-from sqlalchemy import create_engine
 
 
 class DownloadYahooData:
@@ -46,14 +43,3 @@ class DownloadYahooData:
             print("Data downloaded successfully for symbol: {} ".format(symbol))
         except Exception as e:
             print("Data not available for download for symbol: {0}, and error: {1} ".format(symbol, e))
-
-
-if __name__ == '__main__':
-    YahooData = DownloadYahooData()
-    tickers = YahooData.get_tickers()
-    # print(tickers)
-    symbols = ['SLTB', 'SBBC', 'HUNTU', 'CLDX', 'XOM', 'SLB']
-
-    for sym in symbols:
-        YahooData.download_yf_data(sym, '2018-4-4')
-    # print(YahooData.get_id(symbol='AAPL'))
