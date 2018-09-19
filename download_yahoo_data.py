@@ -43,3 +43,12 @@ class DownloadYahooData:
             print("Data downloaded successfully for symbol: {} ".format(symbol))
         except Exception as e:
             print("Data not available for download for symbol: {0}, and error: {1} ".format(symbol, e))
+
+    @staticmethod
+    def download_adhoc_symbols():
+        conn = pyodbc.connect('DRIVER={ODBC Driver 13 for SQL Server};SERVER=KINGSLEY;DATABASE=Security; UID=kings;\
+                Trusted_Connection=yes;')
+        query = 'SELECT ltrim(rtrim(Symbol)) "Symbol" FROM [Security].[dbo].[SecurityDetails] WHERE Id NOT IN \
+        (select SymbolId FROM SecurityPrice where PriceDate = CAST(GETDATE() AS DATE))'
+        return pd.read_sql_query(query, conn)
+

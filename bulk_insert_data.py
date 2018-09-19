@@ -10,6 +10,7 @@ def bulk_insert_data():
     os.chdir('E:\Projects\yahoo-data-download\MergedFiles')
     for ff in glob.glob('*.csv'):
         from_path = os.path.join('E:\Projects\yahoo-data-download\MergedFiles', ff)
+        print('Bulk inserting file: ', os.path.join('E:\Projects\yahoo-data-download\MergedFiles', ff))
         query = "BULK INSERT [Security].[dbo].[SecurityPrice] FROM '{0}' WITH (FIRSTROW = 2, FIELDTERMINATOR = ','," \
                 "ROWTERMINATOR = '\n');".format(from_path)
         try:
