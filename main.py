@@ -1,16 +1,18 @@
-from download_yahoo_data import DownloadYahooData
-from merge_files import MergeFiles
-from bulk_insert_data import bulk_insert_data
-from pandas.tseries.holiday import USFederalHolidayCalendar
-from pandas.tseries.offsets import CustomBusinessDay
-from datetime import date
-import pandas as pd
 import os
 import time
+from datetime import date, timedelta
+
+import pandas as pd
+from pandas.tseries.holiday import USFederalHolidayCalendar
+from pandas.tseries.offsets import CustomBusinessDay
+
+from bulk_insert_data import bulk_insert_data
+from download_yahoo_data import DownloadYahooData
+from merge_files import MergeFiles
 
 
 def main():
-    date_today = date.today().strftime('%Y-%m-%d')
+    date_today = (date.today()-timedelta(days=3)).strftime('%Y-%m-%d')
     us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
     business_day = pd.DatetimeIndex(start=date_today, end=date_today, freq=us_bd)
     download_path = 'E:\Projects\yahoo-data-download\Data'
@@ -42,7 +44,7 @@ def remove_files(file_path):
 
 
 def run_adhoc_process():
-    date_today = date.today().strftime('%Y-%m-%d')
+    date_today = (date.today()-timedelta(days=3)).strftime('%Y-%m-%d')
     us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
     business_day = pd.DatetimeIndex(start=date_today, end=date_today, freq=us_bd)
     download_path = 'E:\Projects\yahoo-data-download\Data'
@@ -69,5 +71,5 @@ def run_adhoc_process():
 if __name__ == '__main__':
     main()
     time.sleep(20)
-    for _ in range(5):
+    for _ in range(4):
         run_adhoc_process()
